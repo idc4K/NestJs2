@@ -13,7 +13,7 @@ lerna-debug.log*
 docker-compose.yml
 # OS
 .DS_Store
-/.docker-data
+*.docker-data
 # Tests
 /.docker-data/
 /coverage
