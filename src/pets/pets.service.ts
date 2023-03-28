@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreatePetInput } from './create-pet.input';
 import { Pet } from './pets.entity';
+import { FindOptionsWhere } from 'typeorm';
 
 @Injectable()
 export class PetsService {
@@ -13,6 +14,7 @@ export class PetsService {
 
         return this.petsRepository.save(newPet)
     }
+
     async findAll():Promise<Pet[]>{
         // const pet = new Pet();
         // pet.id=1;
@@ -21,4 +23,8 @@ export class PetsService {
         // return [pet]
         return this.petsRepository.find() // SELECT * pet
     }
+
+   findOnePet(id:number):Promise<Pet>{
+     return this.petsRepository.findOneOrFail({ where :{id}})
+   }
 }
