@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { PetsModule } from './pets/pets.module';
 import {ApolloDriver, ApolloDriverConfig} from '@nestjs/apollo'
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { OwnersModule } from './owners/owners.module';
 //import TypeOrmModule from '@nestjs/typeorm'
 
 @Module({
@@ -24,7 +25,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities:['dist/**/*.entity{.ts,.js}'],
       synchronize:true
   }),
-  PetsModule],
+  PetsModule,
+  OwnersModule],
   controllers: [AppController],
   providers: [AppService],
 })

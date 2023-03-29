@@ -6,18 +6,44 @@ type Pet {
   id: Int!
   name: String!
   type: String
+  ownderId: Int!
+  owner: Owner!
+}
+
+type Owner {
+  id: Int!
+  name: String!
+  first_name: String!
+  pets: [Pet!]
 }
 
 type Query {
   getAll: [Pet!]!
   getPet(id: Int!): Pet!
+  owners: [Owner!]!
+  owner(id: Int!): Owner!
 }
 
 type Mutation {
   createPet(createPetInput: CreatePetInput!): Pet!
+  createOwner(createOwnerInput: CreateOwnerInput!): Owner!
+  updateOwner(updateOwnerInput: UpdateOwnerInput!): Owner!
+  removeOwner(id: Int!): Owner!
 }
 
 input CreatePetInput {
   name: String!
   type: String
+  ownderId: Int!
+}
+
+input CreateOwnerInput {
+  name: String!
+  first_name: String!
+}
+
+input UpdateOwnerInput {
+  name: String
+  first_name: String
+  id: Int!
 }

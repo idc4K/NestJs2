@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Owner } from 'src/owners/entities/owner.entity';
+import { OwnersService } from 'src/owners/owners.service';
 import { Repository } from 'typeorm';
 import { CreatePetInput } from './create-pet.input';
 import { Pet } from './pets.entity';
-import { FindOptionsWhere } from 'typeorm';
+
 
 @Injectable()
 export class PetsService {
-    constructor(@InjectRepository(Pet) private petsRepository:Repository<Pet>){}
+    constructor(@InjectRepository(Pet) private petsRepository:Repository<Pet>, private ownersService:OwnersService){}
     
     createPet(createPetInput : CreatePetInput): Promise<Pet>{
         const newPet = this.petsRepository.create(createPetInput) // const newPet = new Pet(); newPet.name=""
@@ -26,5 +28,9 @@ export class PetsService {
 
    findOnePet(id:number):Promise<Pet>{
      return this.petsRepository.findOneOrFail({ where :{id}})
+   }
+
+   getOwner(ownderId:number):Promise<Owner>{
+        return this.ownersService.findOneOwner(ownderId)
    }
 }
