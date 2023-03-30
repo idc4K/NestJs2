@@ -7,6 +7,8 @@ import { OwnersModule } from 'src/owners/owners.module';
 
 @Module({
   imports : [TypeOrmModule.forFeature([Pet]), OwnersModule],
-  providers: [PetsService, PetsResolver]
+  providers: [PetsService, PetsResolver],
+  exports : [PetsService]
+  
 })
 export class PetsModule {}

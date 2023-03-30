@@ -23,5 +23,6 @@ export class Pet{
 
     @ManyToOne(() => Owner, owner=>owner.pets)
     @Field(type => Owner)
-    owner:Owner[]
+    
+    owner:Owner
 }

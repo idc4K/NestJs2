@@ -3,6 +3,7 @@ import { Owner } from 'src/owners/entities/owner.entity';
 import { CreatePetInput } from './create-pet.input';
 import { Pet } from './pets.entity';
 import { PetsService } from './pets.service';
+import { UpdatePetInput } from './update-pet.input';
 
 @Resolver((of) => Pet)
 export class PetsResolver {
@@ -26,5 +27,16 @@ export class PetsResolver {
     @ResolveField(returns => Owner)
     owner(@Parent() pet:Pet): Promise<Owner>{
         return this.petService.getOwner(pet.ownderId)
+    }
+
+    @Mutation(() => Pet)
+    updatePet(@Args('updatePetInput') updatePetInput: UpdatePetInput) {
+      return this.petService.updatePet(updatePetInput.id, updatePetInput);
+    }
+
+    @Mutation(() => Pet)
+    async removePet(@Args('id', { type: () => Int }) id: number) {
+      await this.petService.removePet(id);
+      return Pet
     }
 }
